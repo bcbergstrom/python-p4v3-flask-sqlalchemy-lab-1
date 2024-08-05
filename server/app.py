@@ -27,7 +27,7 @@ def route_id(id):
     if query_first is None:
         return make_response({'message': 'Earthquake {} not found.'.format(id)}, 404)
     return query_first.to_dict()    
-@app.route('/earthquakes/magnitude/<float:magnitude>')
+@app.route('/earthquakes/magnitude/<float:mag>')
 def route_magnitude(mag):
     all_e = Earthquake.query.filter(Earthquake.magnitude >= mag).all()
     return_list = []
@@ -35,7 +35,7 @@ def route_magnitude(mag):
     for i in all_e:
         return_list.append(i.to_dict())
         count += 1
-    return {'count': count, 'quakes': return_list} 
+    return {'count': count, 'quakes': return_list}
     
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
